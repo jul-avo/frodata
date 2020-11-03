@@ -12,6 +12,8 @@ module FrOData
       attr_accessor :format
       # Params hash
       attr_accessor :params
+      # Body
+      attr_accessor :body
 
       # Create a new request
       # @param service [FrOData::Service] Where the request will be sent
@@ -24,6 +26,7 @@ module FrOData
         @format = options.delete(:format) || :auto
         @query  = options.delete(:query)
         @params = options.delete(:params)
+        @body = options.delete(:body)
         @options = options
       end
 
@@ -59,6 +62,7 @@ module FrOData
 
       def make_request(request_options = {})
         connection.run_request(method, url_chunk, nil, headers) do |req|
+          req.body = body
           req.params.update(params) if params
           req.options.merge! request_options
         end
