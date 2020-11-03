@@ -96,7 +96,7 @@ module FrOData
         entity[entity.primary_key] = primary_key_node.content unless primary_key_node.nil?
       end
 
-      unless result.code.to_s =~ /^2[0-9][0-9]$/
+      unless result.status.to_s =~ /^2[0-9][0-9]$/
         entity.errors << ['could not commit entity']
       end
 
@@ -125,7 +125,7 @@ module FrOData
 
     def execute_entity_post_request(options, url_chunk)
       result = service.execute(url_chunk, options)
-      unless result.code.to_s =~ /^2[0-9][0-9]$/
+      unless result.status.to_s =~ /^2[0-9][0-9]$/
         service.logger.debug <<-EOS
           [ODATA: #{service_name}]
           An error was encountered committing your entity:
