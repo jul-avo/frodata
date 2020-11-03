@@ -149,10 +149,10 @@ module FrOData
       chunk = entity.is_new? ? name : "#{name}(#{primary_key})"
       options = {
           method: :post,
-          body: entity.to_xml.gsub(/\n\s+/, ''),
+          body: entity.to_json,
           headers: {
-              'Accept' => 'application/atom+xml',
-              'Content-Type' => 'application/atom+xml'
+              'Accept' => 'application/json',
+              'Content-Type' => 'application/json'
           }
       }
       return chunk, options
