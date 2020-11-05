@@ -33,6 +33,7 @@ module FrOData
       @entity_set = options[:entity_set]
       @context = options[:context]
       @links = options[:links]
+      @new_record = options[:new_record]
       @errors = []
     end
 
@@ -218,7 +219,7 @@ module FrOData
     end
 
     def is_new?
-      self[primary_key].nil?
+      @new_record
     end
 
     def any_errors?

@@ -148,7 +148,7 @@ module FrOData
       primary_key = entity.get_property(entity.primary_key).url_value
       chunk = entity.is_new? ? name : "#{name}(#{primary_key})"
       options = {
-          method: :post,
+          method: entity.is_new?? :post : :patch,
           body: entity.to_json,
           headers: {
               'Accept' => 'application/json',
