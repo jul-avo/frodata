@@ -12,7 +12,7 @@ module FrOData
     # The entity set this entity belongs to
     attr_reader :entity_set
     # List of errors on entity
-    attr_reader :errors
+    attr_accessor :errors
     # Response json
     attr_accessor :json
 
