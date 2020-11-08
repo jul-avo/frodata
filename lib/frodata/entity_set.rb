@@ -90,14 +90,17 @@ module FrOData
     def <<(entity)
       url_chunk, options = setup_entity_post_request(entity)
       result = execute_entity_post_request(options, url_chunk)
-      if entity.is_new?
-        doc = ::Nokogiri::XML(result.body).remove_namespaces!
-        primary_key_node = doc.xpath("//content/properties/#{entity.primary_key}").first
-        entity[entity.primary_key] = primary_key_node.content unless primary_key_node.nil?
-      end
+
+      #if entity.is_new?
+        #doc = ::Nokogiri::XML(result.body).remove_namespaces!
+        #primary_key_node = doc.xpath("//content/properties/#{entity.primary_key}").first
+        #entity[entity.primary_key] = primary_key_node.content unless primary_key_node.nil?
+      #end
 
       unless result.status.to_s =~ /^2[0-9][0-9]$/
         entity.errors << ['could not commit entity']
+      else
+        entity.json = JSON.parse(result.body)
       end
 
       entity

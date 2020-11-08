@@ -13,6 +13,8 @@ module FrOData
     attr_reader :entity_set
     # List of errors on entity
     attr_reader :errors
+    # Response json
+    attr_accessor :json
 
     PROPERTY_NOT_LOADED = :not_loaded
 
